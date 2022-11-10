@@ -1,0 +1,47 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+<div class="container" style="margin-top: 10rem;">
+<h2 class="text-center">Advertisement list</h2>
+<a href="{{ path('admin_add_advertisement') }}" class="btn btn-outline-warning"><i class="bi bi-plus-square"></i> Add 
+</a>
+{% if advert is not empty %}
+<table id="table"
+   data-search="true"
+   data-show-search-clear-button="true"
+   class="table table-sm table-hover table-striped text-center shadow-sm mt-3">
+   <thead>
+      <tr>
+         <th>#</th>
+         <th>Company</th>
+         <th>title</th>
+         <th>Contract</th>
+         <th>CreatedDate</th>
+         <th>Update</th>
+         <th>Delete</th>
+      </tr>
+   </thead>
+   <tbody>
+   {% for ad in advert %}
+      <tr>
+         <td>{{ ad.id }}</td>
+         <td>{{ ad.company.name }}</td>
+         <td>{{ ad.titre }}</td>
+         <td>{{ ad.contract }}</td>
+         <td>{{ ad.createdDate | date('d/m/Y') }}</td>
+         <td><a href="{{ path('admin_update_advertisement', {id:ad.id}) }}"><i class="bi bi-pencil-square text-success"></a></i></td>
+         <td><a href="{{ path('delete_advertisement', {id:ad.id}) }}"><i class="bi bi-trash text-danger"></i></a></td>
+      </tr>
+   {% endfor %}
+   </tbody>
+</table>
+{% else %}
+<h2>No advertisement at the moment</h2>
+{% endif %}
+</div>
+<script>
+   $(function() {
+      $('#table').bootstrapTable()
+   })
+</script>
+{% endblock %}

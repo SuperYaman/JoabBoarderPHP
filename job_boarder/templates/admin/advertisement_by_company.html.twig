@@ -1,0 +1,44 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+<div class="container" style="margin-top: 10rem;">
+<h2 class="text-center">Advertisement</h2>
+{% if advertisement is not empty %}
+<table id="table"
+   data-search="true"
+   data-show-search-clear-button="true"
+   class="table table-sm table-hover table-striped text-center shadow-sm mt-3">
+   <thead>
+      <tr>
+         <th>Company</th>
+         <th>Advertisement</th>
+         <th>title</th>
+         <th>Created date</th>
+         <th>Details</th>
+         <th>Delete</th>
+      </tr>
+   </thead>
+   <tbody>
+   {% for advert in advertisement %}
+      <tr>
+         <td>{{ advert.company.name }}</td>
+         <td>{{ advert.id }}</td>
+         <td>{{ advert.titre }}</td>
+         <td>{{ advert.createdDate | date('d/m/y') }}</td>
+         <td><a href=""><i class="bi bi-card-text text-primary"></i></a></td>
+         <td><a href=""><i class="bi bi-trash text-danger"></i></a></td>
+      </tr>
+   {% endfor %}
+   </tbody>
+</table>
+{% else %}
+<h2>No advertisement for this company</h2>
+{% endif %}
+</div>
+<script>
+   $(function() {
+      $('#table').bootstrapTable()
+   })
+</script>
+
+{% endblock %}

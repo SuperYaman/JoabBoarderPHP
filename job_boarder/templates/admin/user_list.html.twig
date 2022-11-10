@@ -1,0 +1,53 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+<div class="container" style="margin-top: 10rem;">
+<h2 class="text-center">user list</h2>
+<a href="{{ path('admin_create_user') }}" class="btn btn-outline-warning"><i class="bi bi-plus-square"></i> Add</a>
+{% if user is not empty %}
+<table id="table"
+   data-search="true"
+   data-show-search-clear-button="true"
+   class="table table-sm table-hover table-striped text-center shadow-sm mt-3">
+   <thead>
+      <tr>
+         <th>#</th>
+         <th>name</th>
+         <th>firstName</th>
+         <th>Email</th>
+         <th>city</th>
+         <th>rôle</th>
+         <th>Update</th>
+         <th>Delete</th>
+      </tr>
+   </thead>
+   <tbody>
+   {% for item in user %}
+      <tr>
+         <td>{{ item.id }}</td>
+         <td>{{ item.name }}</td>
+         <td>{{ item.firstName }}</td>
+         <td>{{ item.email }}</td>
+         <td>{{ item.city }}</td>
+         <td>
+         {% for unrole in item.roles %}
+            {{ unrole }}
+         {% endfor %}
+         <a href="{{ path('promote_user', {id:item.id}) }}" onclick="return confirm('Are you sur to change user role ?')"><i class="bi bi-arrow-left-right text-danger" style="font-size: 1.3rem;"></i></a>
+         </td>
+         <td><a href="{{ path('admin_update_user', {id:item.id}) }}"><i class="bi bi-pencil-square text-success"></a></i></td>
+         <td><a href="{{ path('delete_user', {id:item.id}) }}"><i class="bi bi-trash text-danger"></i></a></td>
+      </tr>
+   {% endfor %}
+   </tbody>
+</table>
+{% else %}
+<h2>No advertisement at the moment</h2>
+{% endif %}
+</div>
+<script>
+   $(function() {
+      $('#table').bootstrapTable()
+   })
+</script>
+{% endblock %}

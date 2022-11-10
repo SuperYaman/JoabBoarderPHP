@@ -1,0 +1,51 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+<div class="container" style="margin-top: 10em;">
+<div class="card my-4 w-75 mx-auto shadow-sm">
+	<div class="card-body">
+	<p class="font-weight-bold">{{advert.titre}}</p>
+	<p class="lead text-uppercase">{{advert.company.name}}</p>
+	<p class="font-weight-light">{{advert.contract}} | {{advert.company.city}} | Published on {{advert.createdDate | date('d/m/y')}}</p>
+	<p class="card-text">{{advert.post | slice(0,20) }}...</p>
+	<div>
+		<button class="btn btn-outline-primary mx-1" type="button" data-toggle="collapse" data-target="#{{advert.id}}" aria-expanded="false">read more</button>
+	</div>
+	<br>
+	<div class="collapse" id="{{advert.id}}">
+		<div class="card card-body">{{ advert.post }}</div>
+	</div>
+</div>
+</div>
+
+{#  Form Apply  #}
+<div class="card text-center shadow-sm">
+			<div class="card-header text-uppercase">
+				<h5 class="m-0">Society</h5>
+			</div>
+			<div class="card-body">
+				<p class="card-text">Name : {{ user.name }}</p>
+            <p>Firstname : {{ user.firstName }}</p>
+            <p>Email : {{ user.email }}</p>
+            <p class="text-secondary"></p>
+			</div>
+			<div class="card-footer text-muted">
+         <p></p>
+			</div>
+		</div>
+<div class="my-4 text-center">
+<h4 class="my-3">user information</h4>
+Nom: {{ user.name }}<br>
+Prénom : {{ user.firstName }}<br>
+Email : {{ user.email }}
+</div>
+<div class="mx-auto w-75">
+{{form_start(form)}}
+{{form_row(form.message)}}
+<a class="btn btn-outline-secondary" href="{{ path('advertisement') }}">Cancel</a>
+<button type="submit" class="btn btn-outline-primary">send</button>
+{{form_end(form)}}
+</div>
+
+</div>
+{% endblock %}

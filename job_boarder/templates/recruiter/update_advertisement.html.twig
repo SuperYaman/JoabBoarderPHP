@@ -1,0 +1,15 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+<div style="margin-top: 10em;">
+{{form_start(form)}}
+{{form_row(form.titre)}}
+{{form_row(form.contract)}}
+{{form_row(form.domain)}}
+{{form_row(form.post)}}
+{{form_row(form.createdDate)}}
+{# {{form_row(form.company)}} #}
+<button type="submit" class="btn btn-outline-success">TO VALIDATE</button>
+{{form_end(form)}}
+</div>
+{% endblock %}

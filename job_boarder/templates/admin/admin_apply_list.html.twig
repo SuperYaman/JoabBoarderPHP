@@ -1,0 +1,48 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+<div class="container" style="margin-top: 10rem;">
+<h2 class="text-center">Apply list</h2>
+{% if applyList is not empty %}
+<table id="table"
+   data-search="true"
+   data-show-search-clear-button="true"
+   class="table table-sm table-hover table-striped text-center shadow-sm mt-3">
+   <thead>
+      <tr>
+         <th>Advertisement</th>
+         <th>Titre</th>
+         <th>Company</th>
+         <th>User</th>
+         <th>Message</th>
+         {# <th>Details</th> #}
+         <th>Update</th>
+         <th>Delete</th>
+      </tr>
+   </thead>
+   <tbody>
+   {% for apply in applyList %}
+      <tr>
+         <td>{{ apply.id }}</td>
+         <td>{{ apply.advertisement.title }}</td>
+         <td>{{ apply.advertisement.company.name }}</td>
+         <td>{{ apply.user.email }}</td>
+         <td>{{ apply.message }}</td>
+         {# <td><a href="{{ path('update_apply', {id:apply.id}) }}"><i class="bi bi-card-text text-primary"></i></a></td> #}
+         <td><a href="{{ path('admin_update_apply', {id:apply.id}) }}"><i class="bi bi-pencil-square text-success"></a></i></td>
+         <td><a href="{{ path('admin_delete_apply', {id:apply.id}) }}"><i class="bi bi-trash text-danger"></i></a></td>
+      </tr>
+   {% endfor %}
+   </tbody>
+</table>
+{% else %}
+<h2>No applications at the moment</h2>
+{% endif %}
+</div>
+<script>
+   $(function() {
+      $('#table').bootstrapTable()
+   })
+</script>
+
+{% endblock %}

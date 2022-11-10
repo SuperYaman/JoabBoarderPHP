@@ -1,0 +1,37 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+<div class="container" style="margin-top: 10rem;">
+<h2 class="text-center my-4">Your apply</h2>
+{% if applys is not empty %}
+<table id="table"
+   data-search="true"
+   data-show-search-clear-button="true"
+   class="table table-sm table-hover table-striped text-center shadow-sm mt-3">
+   <thead>
+      <tr>
+         <th>Advertisement</th>
+         <th>Company</th>
+         <th>Message</th>
+      </tr>
+   </thead>
+   <tbody>
+   {% for apply in applys %}
+      <tr>
+         <td>{{ apply.advertisement.titre }}</td>
+         <td>{{ apply.advertisement.company.name }}</td>
+         <td>{{ apply.message }}</td>
+      </tr>
+   {% endfor %}
+   </tbody>
+</table>
+{% else %}
+<h2 class="text-center">You have no apply at the moment!</h2>
+{% endif %}
+</div>
+<script>
+   $(function() {
+      $('#table').bootstrapTable()
+   })
+</script>
+{% endblock %}

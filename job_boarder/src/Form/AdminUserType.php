@@ -1,0 +1,50 @@
+<?php
+
+namespace App\Form;
+
+use App\Entity\User;
+use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+
+class AdminUserType extends AbstractType
+{
+    public function buildForm(FormBuilderInterface $builder, array $options): void
+    {
+        if($options['add'] == true)
+        {
+            $builder
+                ->add('email')
+                // ->add('roles')
+                ->add('password')
+                ->add('name')
+                ->add('firstName')
+                ->add('city')
+                ->add('recruiter')
+                ->add('company')
+            ;
+        }
+        elseif($options['update'])
+        {
+            $builder
+                ->add('email')
+                // ->add('roles')
+                ->add('password')
+                ->add('name')
+                ->add('firstName')
+                ->add('city')
+                ->add('recruiter')
+                ->add('company')
+            ;
+        }
+    }
+
+    public function configureOptions(OptionsResolver $resolver): void
+    {
+        $resolver->setDefaults([
+            'data_class' => User::class,
+            'add'=>false,
+            'update'=>false
+        ]);
+    }
+}

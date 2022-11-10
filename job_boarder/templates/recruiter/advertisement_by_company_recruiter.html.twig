@@ -1,0 +1,37 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+<div class="container" style="margin-top: 10em;">
+<h4 class="text-center">My Advertisement</h4>
+<div class="text-center my-4">
+<a class="btn btn-outline-warning" href="{{path('add_advertisement', {id:company.id})}}" role="button">
+      <i class="bi bi-plus-square"></i> Add 
+   </a>
+</div>
+{% if advertisement is not empty %}
+{% for advert in advertisement %}
+<div class="card my-4 w-75 mx-auto shadow-sm">
+	<div class="card-body">
+	<p class="font-weight-bold">{{advert.titre}}</p>
+	<p class="lead text-uppercase">{{advert.company.name}}</p>
+	<p class="font-weight-light">{{advert.contract}} | {{advert.company.city}} | Published on {{advert.createdDate | date('d/m/y')}}</p>
+	<p class="card-text">{{advert.post | slice(0,20) }}...</p>
+	<div>
+		<button class="btn btn-outline-primary mx-1" type="button" data-toggle="collapse" data-target="#{{advert.id}}" aria-expanded="false">
+				read more</button>
+      <a href="{{ path('apply_list', {id:advert.id}) }}" class="btn btn-outline-success">SHOW APPLY</a>
+      <a href="{{ path('not_user_apply_list', {id:advert.id}) }}" class="btn btn-outline-secondary">NOT USER APPLY</a>
+      <a href="{{ path('update_advertisement', {id:advert.id}) }}" class="btn btn-outline-warning">UPDATE</a>
+      <a href="{{ path('delete_advertisement', {id:advert.id}) }}" class="btn btn-outline-danger">DELETE</a>
+	</div>
+	<br>
+	<div class="collapse" id="{{advert.id}}">
+		<div class="card card-body">{{ advert.post }}</div>
+	</div>
+</div>
+</div>
+{% endfor %}
+{% else %}
+<h4 class="text-center">you have not created any advertisements yet</h4>
+{% endif %}
+{% endblock %}

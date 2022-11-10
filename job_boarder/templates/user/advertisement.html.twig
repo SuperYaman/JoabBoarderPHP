@@ -1,0 +1,32 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+<div class="container" style="margin-top: 10em;">
+<h4 class="text-center">Advertisement</h4>
+{% if advertisement is not empty %}
+{% for advert in advertisement %}
+<div class="card my-4 w-75 mx-auto shadow-sm">
+	<div class="card-body">
+	<p class="font-weight-bold">{{advert.titre}}</p>
+	<p class="lead text-uppercase">{{advert.company.name}}</p>
+	<p class="font-weight-light">{{advert.contract}} | {{advert.company.city}} | Published on {{advert.createdDate | date('d/m/y')}}</p>
+	<p class="card-text">{{advert.post | slice(0,20) }}...</p>
+	<div>
+		<button class="btn btn-outline-primary mx-1" type="button" data-toggle="collapse" data-target="#{{advert.id}}" aria-expanded="false">read more</button>
+		{% if is_granted('ROLE_USER') %}
+		<a class="btn btn-outline-success" href="{{ path('apply', {id:advert.id}) }}" role="button">apply</a>		
+		{% else %}
+			</button><a class="btn btn-outline-success" href="{{ path('not_user_apply', {id:advert.id}) }}" role="button">apply</a>
+		{% endif %}
+	</div>
+	<br>
+	<div class="collapse" id="{{advert.id}}">
+		<div class="card card-body">{{ advert.post }}</div>
+	</div>
+</div>
+</div>
+{% endfor %}
+{% else %}
+<h2>Il n'a pas d'annonces pour le moment!</h2>
+{% endif %}
+{% endblock %}

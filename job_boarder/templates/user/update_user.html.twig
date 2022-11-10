@@ -1,0 +1,15 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+<div class="container" style="margin-top: 10em;">
+{{ form_start(form) }}
+{{ form_row(form.name) }}
+{{ form_row(form.firstName) }}
+{{ form_row(form.city) }}
+{{ form_row(form.email) }}
+<button type="submit" class="btn btn-outline-success">valider</button>
+{{ form_end(form) }}
+</div>
+
+
+{% endblock %}
